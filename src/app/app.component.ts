@@ -33,7 +33,11 @@ export class AppComponent {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
-  filtrarContatosPorTexto (): Contato [] {
+  adicionarContato(contato: Contato){
+    this.contatos.push(contato)
+  }
+
+  private filtrarContatosPorTexto (): Contato [] {
     if (!this.filtroPorTexto) {
         return this.contatos
 }
