@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CabecalhoComponent } from '../../componentes/cabecalho/cabecalho.component';
@@ -7,7 +7,7 @@ import { ContatoComponent } from '../../componentes/contato/contato.component';
 import { SeparadorComponent } from '../../componentes/separador/separador.component';
 import { FormularioContatoComponent } from '../formulario-contato/formulario-contato.component';
 
-import agenda from '../../agenda.json'
+import { ContatoService } from '../../services/contato.service';
 
 
 interface Contato{
@@ -23,18 +23,21 @@ interface Contato{
   templateUrl: './lista-contatos.component.html',
   styleUrl: './lista-contatos.component.css'
 })
-export class ListaContatosComponent {
+export class ListaContatosComponent implements OnInit{
   alfabeto: string = 'abcdefghijklmnopqrstuvwxyz';
-  contatos: Contato[] = agenda;
+  contatos: Contato[] = [];
 
   filtroPorTexto: string = '';
 
-  private removerAcentos(texto: string): string {
-    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  constructor(private contatoService: ContatoService){
+  }
+  
+  ngOnInit(){
+    this.contatos = this.contatoService.getContatos();
   }
 
-  adicionarContato(contato: Contato){
-    this.contatos.push(contato)
+  private removerAcentos(texto: string): string {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
   private filtrarContatosPorTexto (): Contato [] {
