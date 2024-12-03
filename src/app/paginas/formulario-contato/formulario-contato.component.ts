@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ContainerComponent } from "../../componentes/container/container.component";
 import { SeparadorComponent } from "../../componentes/separador/separador.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-formulario-contato',
   standalone: true,
-  imports: [CommonModule, ContainerComponent, SeparadorComponent, ReactiveFormsModule],
+  imports: [CommonModule,RouterLink, ContainerComponent, SeparadorComponent, ReactiveFormsModule],
   templateUrl: './formulario-contato.component.html',
   styleUrl: './formulario-contato.component.css'
 })
