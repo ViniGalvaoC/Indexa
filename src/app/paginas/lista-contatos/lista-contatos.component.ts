@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CabecalhoComponent } from '../../componentes/cabecalho/cabecalho.component';
 import { ContainerComponent } from '../../componentes/container/container.component';
 import { ContatoComponent } from '../../componentes/contato/contato.component';
@@ -28,6 +28,11 @@ export class ListaContatosComponent implements OnInit{
   
   ngOnInit(){
     this.contatos = this.contatoService.getContatos();
+  }
+
+  deleteContato(id:number){
+    this.contatoService.deleteContato(id);
+    this.ngOnInit();
   }
 
   private removerAcentos(texto: string): string {

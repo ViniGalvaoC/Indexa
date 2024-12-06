@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ListaContatosComponent } from '../../paginas/lista-contatos/lista-contatos.component';
 
 @Component({
   selector: 'app-contato',
@@ -10,4 +11,12 @@ import { Component, Input } from '@angular/core';
 export class ContatoComponent {
   @Input() nome: string = '';
   @Input() telefone: string = '';
+  @Input() id: number = 0;
+
+  constructor(private listaContatos: ListaContatosComponent){
+
+  }
+  excluirContato(){
+    this.listaContatos.deleteContato(this.id);
+  }
 }

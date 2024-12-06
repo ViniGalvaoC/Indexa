@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Contato } from '../componentes/contato/contato';
+import { HttpClientModule } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ContatoService {
     {"id": 3, "nome": "biel", "telefone": "38 128451235", "email": "bielDoPó@cheirada.com"},
   ];
 
-  constructor() {
+  constructor(private httpClientModule: HttpClientModule) {
     //Tentar obter os dados do localStorage 
     const contatosLocalStorageString = localStorage.getItem('contatos');
     const contatosLocalStorage = contatosLocalStorageString ? JSON.parse(contatosLocalStorageString): null;
@@ -29,11 +30,13 @@ export class ContatoService {
   }
 
   addContato(contato: Contato): void {
+    let newID = this.contatos.length + 1;
+    contato.id = newID;
     this.contatos.push(contato);
     localStorage.setItem('contatos', JSON.stringify(this.contatos));
   }
 
-  deleteContato(id: number): void {
+  deleteContato(id:number): void {
     this.contatos = this.contatos.filter(contato => contato.id !== id);
     localStorage.setItem('contatos', JSON.stringify(this.contatos));
   }
