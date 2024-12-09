@@ -27,12 +27,15 @@ export class ListaContatosComponent implements OnInit{
   }
   
   ngOnInit(){
-    this.contatos = this.contatoService.getContatos();
+    this.contatoService.getContatos().subscribe(listaContatos =>{
+      this.contatos = listaContatos;
+    });
   }
 
   deleteContato(id:number){
-    this.contatoService.deleteContato(id);
-    this.ngOnInit();
+    this.contatoService.deleteContato(id).subscribe(() => {
+      this.ngOnInit();
+    });
   }
 
   private removerAcentos(texto: string): string {

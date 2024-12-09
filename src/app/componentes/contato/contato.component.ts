@@ -13,9 +13,8 @@ export class ContatoComponent {
   @Input() telefone: string = '';
   @Input() id: number = 0;
 
-  constructor(private listaContatos: ListaContatosComponent){
-
-  }
+  constructor(private listaContatos: ListaContatosComponent){}
+  
   excluirContato(){
     this.listaContatos.deleteContato(this.id);
   }

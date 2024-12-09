@@ -35,10 +35,11 @@ export class FormularioContatoComponent implements OnInit{
   }
 
   salvarContato(){
-    this.isSubmitted = true;
-    this.contatoService.addContato(this.contatoForm.value);
-    this.contatoForm.reset();
-    this.router.navigateByUrl("/contatos");
+      this.contatoService.addContato(this.contatoForm.value).subscribe(() => {
+      this.contatoForm.reset();
+      this.router.navigateByUrl("/contatos"); 
+    });
+    
   }
 
   cancelar(){
